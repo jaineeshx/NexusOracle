@@ -3,7 +3,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Target, Swords, Trophy, Zap, Clock, Send } from 'lucide-react';
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://nexus-oracle-api-265235104456.us-central1.run.app/api';
 
 export default function Dashboard({ userDNA }) {
   const [quests, setQuests] = useState([]);

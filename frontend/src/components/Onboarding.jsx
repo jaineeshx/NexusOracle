@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { ScanFace, ChevronRight, Zap } from 'lucide-react';
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://nexus-oracle-api-265235104456.us-central1.run.app/api';
 
 export default function Onboarding({ onComplete }) {
   const [username, setUsername] = useState('');
