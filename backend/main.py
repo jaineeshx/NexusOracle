@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from models import UserOnboard, FanDNA, Quest, Prediction, OracleWarStats
 import random
 import uuid
@@ -15,6 +17,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve the static files of the React app
+app.mount("/assets", StaticFiles(directory="static/assets"), name="assets")
+
+@app.get("/")
+async def serve_frontend():
+    return FileResponse("static/index.html")
 
 # In-memory stores for demo
 users_db = {}
@@ -99,3 +108,7 @@ if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
+
+@app.exception_handler(404)
+async def custom_404_handler(request, exc):
+    return FileResponse("static/index.html")
